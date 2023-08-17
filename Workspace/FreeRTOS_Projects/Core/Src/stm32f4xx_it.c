@@ -55,7 +55,10 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+<<<<<<< HEAD
 extern TIM_HandleTypeDef htim6;
+=======
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 
 /* USER CODE BEGIN EV */
 
@@ -159,6 +162,7 @@ void DebugMon_Handler(void)
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
 
+<<<<<<< HEAD
 /**
   * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
   */
@@ -173,6 +177,8 @@ void TIM6_DAC_IRQHandler(void)
   /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
+=======
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

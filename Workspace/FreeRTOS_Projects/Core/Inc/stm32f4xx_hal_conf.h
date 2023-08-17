@@ -63,7 +63,11 @@
 /* #define HAL_SD_MODULE_ENABLED   */
 /* #define HAL_MMC_MODULE_ENABLED   */
 /* #define HAL_SPI_MODULE_ENABLED   */
+<<<<<<< HEAD
 #define HAL_TIM_MODULE_ENABLED
+=======
+/* #define HAL_TIM_MODULE_ENABLED   */
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 /* #define HAL_UART_MODULE_ENABLED   */
 /* #define HAL_USART_MODULE_ENABLED   */
 /* #define HAL_IRDA_MODULE_ENABLED   */

@@ -36,7 +36,11 @@ Mcu.Pin3=PH0-OSC_IN
 Mcu.Pin30=PB6
 Mcu.Pin31=PB9
 Mcu.Pin32=PE1
+<<<<<<< HEAD
 Mcu.Pin33=VP_SYS_VS_tim6
+=======
+Mcu.Pin33=VP_SYS_VS_Systick
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 Mcu.Pin4=PH1-OSC_OUT
 Mcu.Pin5=PC0
 Mcu.Pin6=PC3
@@ -56,12 +60,18 @@ NVIC.HardFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.MemoryManagement_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.NonMaskableInt_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.PendSV_IRQn=true\:0\:0\:false\:false\:false\:true\:false\:false
+<<<<<<< HEAD
 NVIC.PriorityGroup=NVIC_PRIORITYGROUP_4
 NVIC.SVCall_IRQn=true\:0\:0\:false\:false\:false\:true\:false\:false
 NVIC.SysTick_IRQn=true\:0\:0\:false\:false\:false\:true\:true\:false
 NVIC.TIM6_DAC_IRQn=true\:0\:0\:false\:false\:true\:false\:true\:true
 NVIC.TimeBase=TIM6_DAC_IRQn
 NVIC.TimeBaseIP=TIM6
+=======
+NVIC.PriorityGroup=NVIC_PRIORITYGROUP_0
+NVIC.SVCall_IRQn=true\:0\:0\:false\:false\:false\:true\:false\:false
+NVIC.SysTick_IRQn=true\:0\:0\:false\:false\:false\:true\:true\:false
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 NVIC.UsageFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 PA0-WKUP.GPIOParameters=GPIO_Label
 PA0-WKUP.GPIO_Label=B1 [Blue PushButton]
@@ -327,8 +337,13 @@ SH.GPXTI0.0=GPIO_EXTI0
 SH.GPXTI0.ConfNb=1
 SH.GPXTI1.0=GPIO_EXTI1
 SH.GPXTI1.ConfNb=1
+<<<<<<< HEAD
 VP_SYS_VS_tim6.Mode=TIM6
 VP_SYS_VS_tim6.Signal=SYS_VS_tim6
+=======
+VP_SYS_VS_Systick.Mode=SysTick
+VP_SYS_VS_Systick.Signal=SYS_VS_Systick
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 board=STM32F407G-DISC1
 boardIOC=true
 isbadioc=false

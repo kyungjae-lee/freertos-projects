@@ -52,7 +52,10 @@ void MemManage_Handler(void);
 void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void DebugMon_Handler(void);
+<<<<<<< HEAD
 void TIM6_DAC_IRQHandler(void);
+=======
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

@@ -288,6 +288,7 @@ static void MX_GPIO_Init(void)
 /* USER CODE END 4 */
 
 /**
+<<<<<<< HEAD
   * @brief  Period elapsed callback in non blocking mode
   * @note   This function is called  when TIM6 interrupt took place, inside
   * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
@@ -309,6 +310,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 /**
+=======
+>>>>>>> e3f5b3844f5bc694bf93602c49153497d49fe8a0
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
