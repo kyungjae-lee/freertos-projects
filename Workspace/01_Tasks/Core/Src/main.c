@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+#define DWT_CTRL 	(*(volatile uint32_t *)0xE0001000)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,6 +96,13 @@ int main(void)
   MX_GPIO_Init();
 
   /* USER CODE BEGIN 2 */
+
+  // Enable the cycle counter
+  DWT_CTRL |= (0x1 << 0);	// Set SYCCNTENA bit of DWT_CYCCNT register
+
+  // Start the SEGGER SystemView recording of events
+  SEGGER_SYSVIEW_Conf();
+  SEGGER_SYSVIEW_Start();
 
   // Create Task1 and make sure that the task creation was successful
   status = xTaskCreate(task1_handler, "Task1", 200, "Hello world from Task1", 2, &task1_handle);
@@ -318,7 +325,15 @@ static void task1_handler(void *parameters)
 {
 	while (1)
 	{
-		printf("%s\n", (char *)parameters);
+		// Using '_write()' defined in Src/syscalls.c
+		//printf("%s\n", (char *)parameters);
+
+		// Using '_write()' defined in ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+		// This way you'll be able to see the message on SEGGER SystemView.
+		char msg[100];
+		snprintf(msg, 100, "%s\n", (char *)parameters); /* formatted string is stored in 'msg' */
+		SEGGER_SYSVIEW_PrintfTarget(msg); /* pass the formatted string as an argument */
+
 		taskYIELD();	// Force context switch
 	}
 }
@@ -328,7 +343,15 @@ static void task2_handler(void *parameters)
 {
 	while (1)
 	{
-		printf("%s\n", (char *)parameters);
+		// Using '_write()' defined in Src/syscalls.c
+		//printf("%s\n", (char *)parameters);
+
+		// Using '_write()' defined in ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c
+		// This way you'll be able to see the message on SEGGER SystemView.
+		char msg[100];
+		snprintf(msg, 100, "%s\n", (char *)parameters); /* formatted string is stored in 'msg' */
+		SEGGER_SYSVIEW_PrintfTarget(msg); /* pass the formatted string as an argument */
+
 		taskYIELD();	// Force context switch
 	}
 }
