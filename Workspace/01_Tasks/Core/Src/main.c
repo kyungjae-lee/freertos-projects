@@ -97,11 +97,11 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-  // Enable the cycle counter
-  DWT_CTRL |= (0x1 << 0);	// Set SYCCNTENA bit of DWT_CYCCNT register
-
   // Initialize UART with desired baudrate for SEGGER SystemView with UART-based recording
   SEGGER_UART_init(500000);
+
+  // Enable the cycle counter
+  DWT_CTRL |= (0x1 << 0);	// Set SYCCNTENA bit of DWT_CYCCNT register
 
   // Start the SEGGER SystemView recording of events
   SEGGER_SYSVIEW_Conf();
