@@ -7,7 +7,7 @@ This repository contains the source code for the **FreeRTOS Projects**. Visit th
 ## Introduction
 
 * A collection of projects designed to practice the FreeRTOS kernel integration, porting, and application development for STM32 target board
-* Used SEGGER SystemView software for realtime recording and program analysis
+* Used STM32CubeIDE for software development, SEGGER SystemView software for realtime recording and program analysis
 
 
 
