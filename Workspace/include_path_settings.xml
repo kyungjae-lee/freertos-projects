@@ -15,7 +15,7 @@
       <includepath>/home/klee/repos/freertos-projects/Workspace/Common/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F</includepath>
       <includepath>/home/klee/repos/freertos-projects/Workspace/Common/ThirdParty/SEGGER/Config</includepath>
       <includepath>/home/klee/repos/freertos-projects/Workspace/Common/ThirdParty/SEGGER/OS</includepath>
-      <includepath>/home/klee/repos/freertos-projects/Workspace/Common/ThirdParty/SEGGER</includepath>
+      <includepath>/home/klee/repos/freertos-projects/Workspace/Common/ThirdParty/SEGGER/SEGGER</includepath>
     </language>
     <language name="Object File"/>
   </section>
