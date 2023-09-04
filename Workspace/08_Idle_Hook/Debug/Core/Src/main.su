@@ -1,0 +1,9 @@
+../Core/Src/main.c:68:5:main	48	static,ignoring_inline_asm
+../Core/Src/main.c:143:6:SystemClock_Config	88	static
+../Core/Src/main.c:190:13:MX_GPIO_Init	56	static
+../Core/Src/main.c:325:13:led_green_task_handler	16	static
+../Core/Src/main.c:334:13:led_orange_task_handler	16	static
+../Core/Src/main.c:344:13:led_red_task_handler	16	static
+../Core/Src/main.c:354:6:vApplicationIdleHook	8	static
+../Core/Src/main.c:369:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/main.c:386:6:Error_Handler	4	static,ignoring_inline_asm
