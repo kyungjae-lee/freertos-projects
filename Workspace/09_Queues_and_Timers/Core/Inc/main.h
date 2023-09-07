@@ -31,14 +31,48 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
+#include "timers.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
 
+extern xTaskHandle cmd_task_handle;
+extern xTaskHandle menu_task_handle;
+extern xTaskHandle print_task_handle;
+extern xTaskHandle led_task_handle;
+extern xTaskHandle rtc_task_handle;
+
+extern QueueHandle_t q_data;
+extern QueueHandle_t q_print;
+
+typedef struct
+{
+	uint8_t payload[10];
+	uint32_t len;
+} Command_TypeDef;
+
+// Application states
+typedef enum
+{
+	sMainMenu = 0,
+	sLedEffect,
+	sRtcMenu,
+	sRtcTimeConfig,
+	sRtcDateConfig,
+	sRtcReport
+} State_Enum;
+
+extern State_Enum curr_state;	// Application state
+
+extern TimerHandle_t led_timer_handles[4];
+
+extern RTC_HandleTypeDef hrtc;
+extern UART_HandleTypeDef huart2;
 /* USER CODE END ET */
 
 /* Exported constants --------------------------------------------------------*/
@@ -60,6 +94,14 @@ void cmd_task_handler(void *param);
 void print_task_handler(void *param);
 void led_task_handler(void *param);
 void rtc_task_handler(void *param);
+
+void stop_led_effect(void);
+void led_effect(int n);
+
+void led_effect1(void);
+void led_effect2(void);
+void led_effect3(void);
+void led_effect4(void);
 
 /* USER CODE END EFP */
 
@@ -131,7 +173,10 @@ void rtc_task_handler(void *param);
 #define MEMS_INT2_Pin GPIO_PIN_1
 #define MEMS_INT2_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */
-
+#define LED1 LD4_Pin
+#define LED2 LD3_Pin
+#define LED3 LD5_Pin
+#define LED4 LD6_Pin
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

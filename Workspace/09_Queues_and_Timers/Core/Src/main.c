@@ -53,7 +53,13 @@ xTaskHandle rtc_task_handle;
 QueueHandle_t q_data;
 QueueHandle_t q_print;
 
+// Create an array to manage 4 timer handles
+TimerHandle_t led_timer_handles[4];
+
 uint8_t volatile data_byte;
+
+State_Enum curr_state = sMainMenu;	// Application state
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,6 +68,7 @@ static void MX_GPIO_Init(void);
 static void MX_RTC_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+void led_timer_callback(TimerHandle_t xTimer);
 
 /* USER CODE END PFP */
 
@@ -129,10 +136,15 @@ int main(void)
   q_print = xQueueCreate(10, sizeof(size_t));	// pointer-size
   configASSERT(q_print != NULL);	// If the queue creation fails, program will hand here
 
+  // Create software timers for LED effects
+  for (int i = 0; i < 4; i++)
+	  led_timer_handles[i] = xTimerCreate("led_timer", pdMS_TO_TICKS(500), pdTRUE, (void *)(i + 1), led_timer_callback);
+
+
   // Prepare the USART peripheral so that it can receive data bytes in the interrupt mode.
   // Whenever the data is received, the callback function 'HAL_UART_RxCpltCallback()' will
   // be called.
-  HAL_UART_Receive_IT(&huart2, &data_byte, 1);
+  HAL_UART_Receive_IT(&huart2, (uint8_t *)&data_byte, 1);
 
   // Start FreeRTOS scheduler
   // vTaskStartScheduler() never returns unless there's a problem launching scheduler
@@ -408,6 +420,28 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void led_timer_callback(TimerHandle_t xTimer)
+{
+	int id;
+	id = (uint32_t)pvTimerGetTimerID(xTimer);
+
+	switch (id)
+	{
+	case 1:
+		led_effect1();
+		break;
+	case 2:
+		led_effect2();
+		break;
+	case 3:
+		led_effect3();
+		break;
+	case 4:
+		led_effect4();
+		break;
+	}
+}
 
 // This function is called from the UART interrupt handler, hence executes in the
 // interrupt context.
