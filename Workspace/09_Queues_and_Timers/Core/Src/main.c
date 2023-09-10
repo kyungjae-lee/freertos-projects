@@ -53,8 +53,9 @@ xTaskHandle rtc_task_handle;
 QueueHandle_t q_data;
 QueueHandle_t q_print;
 
-// Create an array to manage 4 timer handles
+// Software timer handles
 TimerHandle_t led_timer_handles[4];
+TimerHandle_t rtc_timer;
 
 uint8_t volatile data_byte;
 

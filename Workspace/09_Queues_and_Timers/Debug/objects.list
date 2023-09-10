@@ -9,6 +9,7 @@
 "./Common/ThirdParty/FreeRTOS/portable/MemMang/heap_4.o"
 "./Core/Src/led_effect.o"
 "./Core/Src/main.o"
+"./Core/Src/rtc.o"
 "./Core/Src/stm32f4xx_hal_msp.o"
 "./Core/Src/stm32f4xx_hal_timebase_tim.o"
 "./Core/Src/stm32f4xx_it.o"
