@@ -2,6 +2,7 @@
 
 #include "main.h"
 
+// Displays RTC time and date information over UART
 void display_time_date(void)
 {
 	static char str_time[40];
@@ -30,6 +31,40 @@ void display_time_date(void)
 
 	// Display date format: date-month-year
 	sprintf((char *)str_date, " %02d-%02d-%02d\n", rtc_date.Month, rtc_date.Date, 2000 + rtc_date.Year);
+	xQueueSend(q_print, &date, portMAX_DELAY);
+}
+
+// Displays RTC time and date information over ITM
+// The only difference between 'display_time_date' and this function is that this function
+// used 'printf' function instead of 'sprintf' to send the data over to ITM.
+void display_time_date_itm(void)
+{
+	static char str_time[40];
+	static char str_date[40];
+
+	RTC_TimeTypeDef rtc_time;
+	RTC_DateTypeDef rtc_date;
+
+	static char *time = str_time;
+	static char *date = str_date;
+
+	memset(&rtc_time, 0, sizeof(rtc_time));
+	memset(&rtc_date, 0, sizeof(rtc_date));
+
+	// Get the RTC current time
+	HAL_RTC_GetTime(&hrtc, &rtc_time, RTC_FORMAT_BIN);
+	// Get the RTC current date
+	HAL_RTC_GetDate(&hrtc, &rtc_date, RTC_FORMAT_BIN);
+
+	char *format;
+	format = (rtc_time.TimeFormat == RTC_HOURFORMAT12_AM) ? "AM" : "PM";
+
+	// Display time format : hh:mm::ss [AM/PM]
+	printf("%s: %02d:%02d:%02d [%s]", "\nCurrent Time&Date", rtc_time.Hours, rtc_time.Minutes, rtc_time.Seconds, format);
+	xQueueSend(q_print, &time, portMAX_DELAY);
+
+	// Display date format: date-month-year
+	printf(" %02d-%02d-%02d\n", rtc_date.Month, rtc_date.Date, 2000 + rtc_date.Year);
 	xQueueSend(q_print, &date, portMAX_DELAY);
 }
 

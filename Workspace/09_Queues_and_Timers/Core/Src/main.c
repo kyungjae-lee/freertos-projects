@@ -55,7 +55,7 @@ QueueHandle_t q_print;
 
 // Software timer handles
 TimerHandle_t led_timer_handles[4];
-TimerHandle_t rtc_timer;
+TimerHandle_t rtc_timer;	// For RTC reporting functionality
 
 uint8_t volatile data_byte;
 
@@ -70,6 +70,7 @@ static void MX_RTC_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 void led_timer_callback(TimerHandle_t xTimer);
+void rtc_report_callback(TimerHandle_t xTimer);	// For RTC reporting functionality
 
 /* USER CODE END PFP */
 
@@ -141,6 +142,8 @@ int main(void)
   for (int i = 0; i < 4; i++)
 	  led_timer_handles[i] = xTimerCreate("led_timer", pdMS_TO_TICKS(500), pdTRUE, (void *)(i + 1), led_timer_callback);
 
+  // Create a software timer for RTC reporting functionality
+  rtc_timer = xTimerCreate("rtc_report_timer", pdMS_TO_TICKS(1000), pdTRUE, NULL, rtc_report_callback);
 
   // Prepare the USART peripheral so that it can receive data bytes in the interrupt mode.
   // Whenever the data is received, the callback function 'HAL_UART_RxCpltCallback()' will
@@ -191,8 +194,8 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 168;
-  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLN = 50;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 7;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
@@ -208,7 +211,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -421,6 +424,12 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void rtc_report_callback(TimerHandle_t xTimer)
+{
+	// Display RTC time and date information to ITM data console
+	display_time_date_itm();
+}
 
 void led_timer_callback(TimerHandle_t xTimer)
 {
